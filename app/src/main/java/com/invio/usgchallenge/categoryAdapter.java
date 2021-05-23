@@ -44,7 +44,7 @@ public class categoryAdapter extends RecyclerView.Adapter<categoryAdapter.CardVi
         holder.categoryCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //categorylerden birine tıklanıldığında category ismi ile arayacağım için 'c=$CategoryName' olarak diğer sayfaya bunları taşıyorum
+
                 Intent intent = new Intent(context, foodList.class);
                 intent.putExtra("search", "c=" + CategoryName);
                 context.startActivity(intent);

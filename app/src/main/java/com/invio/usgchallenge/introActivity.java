@@ -22,7 +22,7 @@ public class introActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                boolean internetConnection = new connectionControl().internetConnection(introActivity.this);//internet kontrolümü yapıyorum.
+                boolean internetConnection = new connectionControl().internetConnection(introActivity.this);
                 if (internetConnection) {
                     Intent i = new Intent(introActivity.this, MainActivity.class);
                     startActivity(i);

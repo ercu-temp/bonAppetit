@@ -51,13 +51,10 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardVi
 
         final String mealName = AdpMealNames.get(position);
         final String mealId = AdpIdMeals.get(position);
-
-        //Burada control sınıfımdan oluşturmuş olduğum nesne ile idsi verilen yemeğin favoride olup olmadığını kontrol ediyorum
-        //Ben burada verileri SharedPreferences ile kaydetmeyi tercih ettim; starControl sayfasında da görüldüğü üzere.
         boolean attached = control.control(context, mealId);
 
 
-        if (attached)//Öncesinde ben bunu favorilediysem görüntüyü renkli yıldız olarak değiştiriyorum.
+        if (attached)
             holder.foodStar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_star_24));
 
         holder.foodListTextView.setText(mealName);
@@ -66,13 +63,12 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardVi
         holder.foodStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Yıldıza tıklanıldıgında öncelikle değişim(true/false) için addOrRemove metodunu çağırıyorum ki true ise false yapsın false ise true yapsın.
                 control.addOrRemove(context, mealId);
-                boolean temp = control.control(context, mealId);// Son durumdaki değeri alıyorum
+                boolean temp = control.control(context, mealId);
 
-                if (temp) {//True ise renkli yıldız
+                if (temp) {
                     holder.foodStar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_star_24));
-                } else {//false ise normal yıldızı aktarıyorum.
+                } else {
                     holder.foodStar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_star_border_24));
 
                 }
@@ -82,12 +78,12 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardVi
 
         holder.foodListCardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//Cardviewin üzerine tıklanıldığında sayfa geçişini yapıyorum.
+            public void onClick(View v) {
                 Intent intent = new Intent(context, foodDetail.class);
                 intent.putExtra("id", mealId);
-                intent.putExtra("search", search);//detay sayfasında sayfayı kapattıgımda foodlist sayfasının tekrar yüklenmesi için bunu burada diğer sayfaya aktarıyorum.
+                intent.putExtra("search", search);
                 context.startActivity(intent);
-                ((Activity) context).finish();//bu işlem çok sağlıklı değil ama değişimi görmek için uyguluyorum.
+                ((Activity) context).finish();
 
             }
         });

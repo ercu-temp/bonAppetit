@@ -45,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
 
-        idMatch();// idleri tanıtma
+        idMatch();
 
-        loading.show();// yükleniyor simgesini sayfam açıldığında gösteriyorum
+        loading.show();
 
-        horizontalList.setLayoutManager(layoutManager);//yatay bir recyclerview istiyorum.
+        horizontalList.setLayoutManager(layoutManager);
         verticalList.setNestedScrollingEnabled(false);
 
         verticalList.setHasFixedSize(false);
-        verticalList.setLayoutManager(gridLayoutManager);//üç sütunlu bir recyclerview istiyorum.
+        verticalList.setLayoutManager(gridLayoutManager);
 
         getRegions();
         getCategories();
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getCategories() {
-        final String url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+        final String url = "yourAPI";
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -83,10 +83,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     myCategoryAdapter = new categoryAdapter(MainActivity.this, categoryNames, categoryThumbLs);
                     verticalList.setAdapter(myCategoryAdapter);
-                    categoryLoadingControl = true;// burada categoryLoadingControl' a true değerini aktarıyorum
-                    // ve alt satırda regionLoadingControl' u sorguluyorum,
-                    // şayet o da true ise zaten yüklenme tamamlanmıştır recyclerviewleri gösterebilirim ve
-                    // yüklenme simgesini kaldırabilirim anlamına gelir
+                    categoryLoadingControl = true;
+
                     if (regionLoadingControl)
                         load();
 
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getRegions() {
-        final String url = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
+        final String url = "yourAPI";
         JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -123,10 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     horizontalList.setAdapter(myRegionAdapter);
 
                     regionLoadingControl = true;
-                    // burada regionLoadingControl' e true değerini aktarıyorum
-                    // ve alt satırda categoryLoadingControl' u sorguluyorum,
-                    // şayet o da true ise zaten yüklenme tamamlanmıştır recyclerviewleri gösterebilirim ve
-                    // yüklenme simgesini kaldırabilirim anlamına gelir
+
                     if (categoryLoadingControl)
                         load();
 

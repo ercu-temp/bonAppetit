@@ -71,7 +71,7 @@ public class foodDetail extends AppCompatActivity {
         if (!internetConnection)
             alertInternetConnection();
         else {
-            final String url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
+            final String url = "yourAPI" + id;
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -137,8 +137,8 @@ public class foodDetail extends AppCompatActivity {
     }
 
     public void turnBack(View view) {
-        Intent i = new Intent(foodDetail.this, foodList.class);    ////Burada finish metodunu kullanmadım çünkü
-        i.putExtra("search", listSearch);                                  //yemek listeleri sayfama geri dönmek istiyorum ve şayet yıldız değiştiyse, sayfa yenilensin ve o yenilenmeyi görebileyim.
+        Intent i = new Intent(foodDetail.this, foodList.class);
+        i.putExtra("search", listSearch);
         startActivity(i);
         finish();
     }
@@ -156,7 +156,7 @@ public class foodDetail extends AppCompatActivity {
 
     public void starControl() {
         boolean attached = starControl.control(this, idToSearch);
-        if (attached)//Öncesinde ben bunu favorilediysem görüntüyü renkli yıldız olarak değiştiriyorum.
+        if (attached)
             detailFoodStar.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_baseline_star_24));
         else {
             detailFoodStar.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_baseline_star_border_24));
@@ -175,8 +175,8 @@ public class foodDetail extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(foodDetail.this, foodList.class);    ////Burada finish metodunu kullanmadım çünkü
-        i.putExtra("search", listSearch);                                  //yemek listeleri sayfama geri dönmek istiyorum ve şayet yıldız değiştiyse, sayfa yenilensin ve o yenilenmeyi görebileyim.
+        Intent i = new Intent(foodDetail.this, foodList.class);
+        i.putExtra("search", listSearch);
         startActivity(i);
         finish();
 
