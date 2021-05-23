@@ -40,14 +40,15 @@ public class foodList extends AppCompatActivity {
 
         idMatch();
         foodLoading.show();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);//GridLayoutManager sayesinde recyclerviewi 2 sütun haline getiriyorum.
+        foodListRv.setLayoutManager(gridLayoutManager);
         foodListRv.setHasFixedSize(true);
 
 
         Intent i = getIntent();
         textToSearch = i.getStringExtra("search");
 
-        foodListTitle.setText(textToSearch.substring(2));
+        foodListTitle.setText(textToSearch.substring(2));//Başlık için; diğer sayfadan gelen değer 'c=xxxx' veya 'a=xxxx' formatından olduğundan burada 2.karakterden itibaren alıyorum.
         getData(textToSearch);
 
 
@@ -59,7 +60,7 @@ public class foodList extends AppCompatActivity {
         if (!internetConnection)
             alertInternetConnection();
         else {
-            final String url = "yourAPI" + text;
+            final String url = "https://www.themealdb.com/api/json/v1/1/filter.php?" + text;
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
