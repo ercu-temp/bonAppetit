@@ -71,7 +71,7 @@ public class foodDetail extends AppCompatActivity {
         if (!internetConnection)
             alertInternetConnection();
         else {
-            final String url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
+            final String url = "yourAPI url" + id;
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
