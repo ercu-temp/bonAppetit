@@ -71,11 +71,10 @@ public class foodDetail extends AppCompatActivity {
         if (!internetConnection)
             alertInternetConnection();
         else {
-            final String url = "yourAPI" + id;
+            final String url = "YOURAPI" + id;
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-
 
                     try {
                         JSONArray categories = response.getJSONArray("meals");
@@ -90,7 +89,6 @@ public class foodDetail extends AppCompatActivity {
 
                             String categoryString = category.getString("strCategory").trim();
                             productCategory.setText(categoryString);
-
 
                             String description = category.getString("strInstructions").trim();
                             productDescription.setText(description);
@@ -120,7 +118,6 @@ public class foodDetail extends AppCompatActivity {
         ad.setTitle("Network Error");
         ad.setIcon(R.drawable.ic_baseline_error_24);
         ad.setCancelable(false);
-
         ad.setPositiveButton("Refresh", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -151,15 +148,14 @@ public class foodDetail extends AppCompatActivity {
         detailFoodStar = findViewById(R.id.detailFoodStar);
         detailLinearV=findViewById(R.id.detailLinearV);
         detailImageView = findViewById(R.id.detailImageView);
-
     }
 
     public void starControl() {
         boolean attached = starControl.control(this, idToSearch);
         if (attached)
-            detailFoodStar.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_baseline_star_24));
+            detailFoodStar.setImageResource(R.drawable.ic_baseline_star_24);
         else {
-            detailFoodStar.setImageDrawable(this.getResources().getDrawable(R.drawable.ic_baseline_star_border_24));
+            detailFoodStar.setImageResource(R.drawable.ic_baseline_star_border_24);
         }
     }
 
@@ -167,7 +163,6 @@ public class foodDetail extends AppCompatActivity {
         foodDetailLoading.setVisibility(View.GONE);
         detailLinearV.setVisibility(View.VISIBLE);
     }
-
     public void hide() {
         detailLinearV.setVisibility(View.INVISIBLE);
     }
@@ -179,6 +174,5 @@ public class foodDetail extends AppCompatActivity {
         i.putExtra("search", listSearch);
         startActivity(i);
         finish();
-
     }
 }

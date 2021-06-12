@@ -13,7 +13,6 @@ public class starControl {
 
     starControl() {
     }
-
     public boolean control(Context context, String id) {
         sharedPreferences = Objects.requireNonNull(context).getSharedPreferences("strControl", MODE_PRIVATE);
         return sharedPreferences.getBoolean(id, false);

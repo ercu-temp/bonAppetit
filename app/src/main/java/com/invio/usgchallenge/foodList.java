@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class foodList extends AppCompatActivity {
-    private ArrayList<String> mealNames, mealThumbs, idMeals;
+    private ArrayList<foodListClass> data;
     private foodListAdapter myFoodListAdapter;
     private TextView foodListTitle;
     private AVLoadingIndicatorView foodLoading;
@@ -60,30 +60,24 @@ public class foodList extends AppCompatActivity {
         if (!internetConnection)
             alertInternetConnection();
         else {
-            final String url = "yourAPI" + text;
+            final String url = "YOURAPI" + text;
             JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
 
-                    mealNames = new ArrayList<>();
-                    mealThumbs = new ArrayList<>();
-                    idMeals = new ArrayList<>();
+                    data = new ArrayList<>();
+
                     try {
                         JSONArray categories = response.getJSONArray("meals");
                         for (int i = 0; i < categories.length(); i++) {
                             JSONObject category = categories.getJSONObject(i);
 
-                            String Name = category.getString("strMeal");
-                            mealNames.add(Name);
-
-                            String CNameThumb = category.getString("strMealThumb");
-                            mealThumbs.add(CNameThumb);
-
-                            String idMeal = category.getString("idMeal");
-                            idMeals.add(idMeal);
+                            foodListClass temp=new foodListClass(category.getString("strMeal"),category.getString("strMealThumb")
+                            ,category.getString("idMeal"));
+                           data.add(temp);
 
                         }
-                        myFoodListAdapter = new foodListAdapter(foodList.this, mealNames, mealThumbs, idMeals, textToSearch);
+                        myFoodListAdapter = new foodListAdapter(foodList.this,data,textToSearch);
                         foodListRv.setAdapter(myFoodListAdapter);
                         foodLoading.hide();
 
@@ -96,7 +90,6 @@ public class foodList extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
 
                 }
             });

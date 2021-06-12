@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/logo_background"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".foodDetail"></activity>
+        <activity android:name=".foodDetail"/>
         <activity android:name=".foodList" />
         <activity android:name=".introActivity">
             <intent-filter>
@@ -21,14 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".MainActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

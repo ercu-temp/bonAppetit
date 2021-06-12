@@ -20,19 +20,16 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardViewObjects> {
-    private List<String> AdpMealNames;
-    private List<String> AdpMealThumbs;
-    private List<String> AdpIdMeals;
+    private List<foodListClass> data;
     private String search;
 
     starControl control = new starControl();
     private Context context;
 
-    public foodListAdapter(Context context, List<String> AdpMealNames, List<String> AdpMealThumbs, List<String> AdpIdMeals, String search) {
+    public foodListAdapter(Context context, List<foodListClass> data, String search) {
         this.context = context;
-        this.AdpMealNames = AdpMealNames;
-        this.AdpMealThumbs = AdpMealThumbs;
-        this.AdpIdMeals = AdpIdMeals;
+        this.data = data;
+
         this.search = search;
 
     }
@@ -49,17 +46,17 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardVi
     @Override
     public void onBindViewHolder(@NonNull final CardViewObjects holder, int position) {
 
-        final String mealName = AdpMealNames.get(position);
-        final String mealId = AdpIdMeals.get(position);
+        final String mealName = data.get(position).mealName;
+        final String mealId = data.get(position).mealId;
         boolean attached = control.control(context, mealId);
 
 
         if (attached)
-            holder.foodStar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_star_24));
+            holder.foodStar.setImageResource(R.drawable.ic_baseline_star_24);
 
         holder.foodListTextView.setText(mealName);
 
-        Picasso.with(holder.foodListImageView.getContext()).load(AdpMealThumbs.get(position)).into(holder.foodListImageView);
+        Picasso.with(holder.foodListImageView.getContext()).load(data.get(position).mealUrl).into(holder.foodListImageView);
         holder.foodStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,10 +64,10 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardVi
                 boolean temp = control.control(context, mealId);
 
                 if (temp) {
-                    holder.foodStar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_star_24));
-                } else {
-                    holder.foodStar.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_star_border_24));
+                    holder.foodStar.setImageResource(R.drawable.ic_baseline_star_24);
 
+                } else {
+                    holder.foodStar.setImageResource(R.drawable.ic_baseline_star_border_24);
                 }
 
             }
@@ -91,7 +88,7 @@ public class foodListAdapter extends RecyclerView.Adapter<foodListAdapter.CardVi
 
     @Override
     public int getItemCount() {
-        return AdpIdMeals.size();
+        return data.size();
     }
 
     public class CardViewObjects extends RecyclerView.ViewHolder {
